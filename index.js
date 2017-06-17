@@ -1,17 +1,19 @@
 var AWS = require('aws-sdk')
 AWS.config.loadFromPath('./config.json')
 
-var docClient = new AWS.DynamoDB().DocumentClient();
+var docClient = new AWS.DynamoDB.DocumentClient();
 
 
 let table = 'coordinates'
+let CustomerId = 'drone1'
 let lat = 51.498800
 let lon = -0.174877
 
 var params = {
     TableName:table,
     Item:{
-        time: new Date,
+        CustomerId,
+        Time: toString(new Date),
         lat,
         lon
     }
