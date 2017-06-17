@@ -1,8 +1,11 @@
-var AWS = require('aws-sdk')
+let app = require('express')()
+let bodyParser = require('body-parser')
+app.use(bodyParser.json())  
+
+let AWS = require('aws-sdk')
 AWS.config.loadFromPath('./config.json')
 
-var docClient = new AWS.DynamoDB.DocumentClient();
-
+let docClient = new AWS.DynamoDB.DocumentClient();
 
 let table = 'coordinates'
 let CustomerId = 'drone1'
@@ -10,20 +13,20 @@ let lat = 51.498800
 let lon = -0.174877
 
 var params = {
-    TableName:table,
-    Item:{
-        CustomerId,
-        Time: toString(new Date),
-        lat,
-        lon
-    }
+  TableName:table,
+  Item:{
+    CustomerId,
+    Time: toString(new Date),
+    lat,
+    lon
+  }
 };
 
-console.log("Adding a new item...");
-docClient.put(params, function(err, data) {
-    if (err) {
-        console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-    } else {
-        console.log("Added item:", JSON.stringify(data, null, 2));
-    }
+app.post('/echo', function(req, res) {
+  console.log(req.body.message)
+  res.sendStatus(200)
+})
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log('running like a bauss on 3000');
 });
