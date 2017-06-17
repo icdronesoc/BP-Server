@@ -29,14 +29,14 @@ var params = {
 };
 
 app.post('/echo', function(req, res) {
-  console.log('Message:', req.body.message)
-  console.log('Customer Id:', req.body.customerId)
+  console.log('Message: ', req.body.message)
+  console.log('Customer Id: ', req.body.customerId)
   res.sendStatus(200)
 })
 
 app.post('/coord', function(req, res) {
-  console.log('Lat:', req.body.lat)
-  console.log('Lon:', req.body.lon)
+  console.log('Lat: ', req.body.lat)
+  console.log('Lon: ', req.body.lon)
   res.sendStatus(200)
 })
 
