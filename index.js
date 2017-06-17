@@ -13,21 +13,6 @@ AWS.config.loadFromPath('config/aws.json')
 // Setup for DynamoDB
 let docClient = new AWS.DynamoDB.DocumentClient();
 
-let table = 'coordinates'
-let CustomerId = 'drone1'
-let lat = 51.498800
-let lon = -0.174877
-
-var params = {
-  TableName:table,
-  Item:{
-    CustomerId,
-    Time: toString(new Date),
-    lat,
-    lon
-  }
-};
-
 app.post('/echo', function(req, res) {
   console.log('Message: ', req.body.message)
   console.log('Customer Id: ', req.body.customerId)
@@ -35,8 +20,30 @@ app.post('/echo', function(req, res) {
 })
 
 app.post('/coord', function(req, res) {
-  console.log('Lat: ', req.body.lat)
-  console.log('Lon: ', req.body.lon)
+  let lat = req.body.lat
+  let lon = req.body.lon
+  let table = 'coordinates'
+  let CustomerId = 'drone1'
+
+  var params = {
+    TableName:table,
+    Item:{
+      CustomerId,
+      Time: toString(new Date),
+      lat,
+      lon
+    }
+  };
+
+  console.log("Adding a new coord(",lat,lon,")...");
+  docClient.put(params, function(err, data) {
+    if (err) {
+      console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+      console.log("Added item:", JSON.stringify(data, null, 2));
+    }
+  })
+
   res.sendStatus(200)
 })
 
