@@ -1,0 +1,17 @@
+{
+  "name": "bp-server",
+  "version": "0.0.1",
+  "description": "Backend server to coordinate requests between alexa and mobile apps",
+  "main": "index.js",
+  "repository": "git@github.com:icdronesoc/BP-Server.git",
+  "author": "Vishnu R Menon",
+  "license": "MIT",
+  "scripts": {
+    "dev" : "node index.js"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.72.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3"
+  }
+}
