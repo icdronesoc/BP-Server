@@ -34,6 +34,12 @@ app.post('/echo', function(req, res) {
   res.sendStatus(200)
 })
 
+app.post('/coord', function(req, res) {
+  console.log('Lat:', req.body.lat)
+  console.log('Lon:', req.body.lon)
+  res.sendStatus(200)
+})
+
 app.listen(process.env.PORT || 3000, function(){
   console.log('running like a bauss on 3000');
 });
