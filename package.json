@@ -7,11 +7,12 @@
   "author": "Vishnu R Menon",
   "license": "MIT",
   "scripts": {
-    "dev" : "node index.js"
+    "dev": "node index.js"
   },
   "dependencies": {
     "aws-sdk": "^2.72.0",
     "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3"
   }
 }

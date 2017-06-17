@@ -1,10 +1,16 @@
+// Load environmental variables
+require('dotenv').config({path: 'config/.env'})
+
+// Setup for express server
 let app = require('express')()
 let bodyParser = require('body-parser')
 app.use(bodyParser.json())  
 
+// Setup for AWS-SDK
 let AWS = require('aws-sdk')
-AWS.config.loadFromPath('./config.json')
+AWS.config.loadFromPath('config/aws.json')
 
+// Setup for DynamoDB
 let docClient = new AWS.DynamoDB.DocumentClient();
 
 let table = 'coordinates'
@@ -23,7 +29,8 @@ var params = {
 };
 
 app.post('/echo', function(req, res) {
-  console.log(req.body.message)
+  console.log('Message:', req.body.message)
+  console.log('Customer Id:', req.body.customerId)
   res.sendStatus(200)
 })
 
