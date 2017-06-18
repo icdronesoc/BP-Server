@@ -22,7 +22,7 @@ let firebaseConfig = require("./config/firebase.js")
 
 admin.initializeApp({
   credential: admin.credential.cert(firebaseConfig.service_account),
-  databaseURL: "https://bpelicansender.firebaseio.com"
+  databaseURL: "https://british-pelican.firebaseio.com"
 })
 
 app.post('/echo', function(req, res) {
@@ -69,13 +69,12 @@ app.post('/echo', function(req, res) {
     // Push Latest msg and waypoint to phone via FCM
     function(item, FCMCb) {
       let payload = {
-        data: {
-          msg,
-          lat: item.lat,
-          lon: item.lon
+        notification: {
+          title: msg,
+          body: item.lat + item.lon
         }
       }
-      let registrationToken = "d9usz9W32Wc:APA91bHRt-lQQFgFCTYHLn-_EzmAz-RdAUK0BgEDiIr9dTFxJE2fPVoG4W9N268IEZml7mDU4SjzjfaiWVJf6bgmhW9wl5TWtE3bnN3h3tR6ijCcVwNm2q_52mANN-kgyIK4ucsv2nsL"
+      let registrationToken = "crINtbOga1o:APA91bGgg3kCKAGvF-wAP4D2UDps4bJ6xdJmXrr90YifwDEgV8QulvHokANzyzynU6xwY5r1NvUbr7iqddRZBa8XzeeZAlCKnvhrwKYGdPqw39V4xq_vo3JpQ6s8-5UbxDdOJRhLtrAS"
       admin.messaging().sendToDevice(registrationToken, payload)
       .then(function(response) {
           // See the MessagingDevicesResponse reference documentation for
